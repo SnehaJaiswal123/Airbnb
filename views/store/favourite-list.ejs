@@ -1,0 +1,17 @@
+<%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/headers') %>
+    <h1>Welcome to Favourites</h1>
+    <ul>
+      <% favouriteHomes.forEach((home)=>{ %>
+        <li>
+            <span><%= home.price %></span>
+            <span><%= home.ratings %></span>
+            <span><%= home.location %></span>
+            <%- include('../partials/remFav',{homeId:home._id}) %>
+        </li>
+      <% }) %>
+    </ul>
+  </body>
+</html>

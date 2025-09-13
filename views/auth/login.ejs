@@ -1,0 +1,20 @@
+<%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/headers') %>
+
+    <% if(typeof errors!=undefined && errors && errors.length>0){
+      errors.forEach((err)=>{ %>
+        <li><%= err %></li>
+      <% }) %>
+    <% } %>
+
+    <h1>Login Yourself:</h1>
+    <form action="/login" method="post">
+      <input type="text" name="email" placeholder="Email" value="<%= oldEmail %>">
+      <input type="password" name="password" placeholder="Password">
+      <button type="submit">Log In</button>
+    </form>
+  </body>
+</html>
+  
