@@ -1,0 +1,21 @@
+<%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/headers') %>
+    <h1>Your Homes:</h1>
+    <ul>
+      <% homes.forEach((home)=>{ %>
+        <li>
+          <span><%= home.price %></span>
+          <span><%= home.rating %></span>
+          <span><%= home.location %></span>
+          <span><%= home.description %></span>
+          <a href="/host/edit-home/<%= home._id %>">Edit</a>
+          <form action="/host/delete-home/<%= home._id %>" method="post">
+            <button type="submit">Delete</button>
+          </form>
+        </li>
+      <% }) %>
+    </ul>
+  </body>
+</html>

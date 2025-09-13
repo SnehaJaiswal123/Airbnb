@@ -1,0 +1,26 @@
+<%- include('../partials/head') %>
+</head>
+<body>
+  <%- include('../partials/headers') %>
+
+  <% if(typeof errors!=undefined && errors && errors.length>0){
+    errors.forEach((err)=>{ %>
+      <li><%= err %></li>
+    <% }) %>
+  <% } %>
+
+  <h1>Signup</h1>
+  <form action="/signup" method="post">
+    <input type="text" name="firstName" placeholder="First Name" value="<%= oldInput.firstName %>" >
+    <input type="text" name="lastName" placeholder="Last Name" value="<%= oldInput.lastName %>">
+    <input type="email" name="email" placeholder="Email" value="<%= oldInput.email %>">
+    <input type="password" name="password" placeholder="Password">
+    <input type="password" name="confirmPass" placeholder="Confirm Password">
+    <input type="radio" id="option1" name="usertype" value="guest">
+    <label for="option1">Guest</label>
+    <input type="radio" id="option2" name="usertype" value="host">
+    <label for="option2">Host</label>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>

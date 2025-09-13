@@ -1,0 +1,20 @@
+<%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/headers') %>
+    <h1>Welcome to AirBnb</h1>
+    <ul>
+      <% homes.forEach((home)=>{ %>
+        <li>
+            <span><%= home.houseName %></span>
+            <span><%= home.price %></span>
+            <span><%= home.rating %></span>
+            <span><%= home.location %></span>
+            <span><%= home.description %></span>
+            <button>Book</button>
+            <a href="/home/<%= home._id %>"> Detail </a>
+        </li>
+      <% }) %>
+    </ul>
+  </body>
+</html>
