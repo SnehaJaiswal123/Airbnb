@@ -8,6 +8,8 @@
     <div><%= home.location %></div>
     <div><%= home.rating %></div>
     <div><%= home.description %></div>
-    <%- include('../partials/favourite') %>
+    <% if(usertype=='guest'){ %>
+      <%- include('../partials/favourite') %>
+    <% } %>
   </body>
 </html>

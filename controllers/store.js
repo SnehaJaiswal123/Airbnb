@@ -2,9 +2,9 @@ const Home = require('../models/home')
 const User = require('../models/user')
 
 
-exports.getHome = (req,res,next)=>{
+exports.getHome = (req,res)=>{
   const isLoggedIn=req.isLoggedIn      
-  const usertype=req.session.user
+  const usertype=req.session.user.usertype
   
   Home.find().then((homes)=>{   
       res.render('store/home-list',{
@@ -18,7 +18,7 @@ exports.getHome = (req,res,next)=>{
   })
 }
 
-exports.getHomeDetails = (req,res,next) =>{
+exports.getHomeDetails = (req,res) =>{
   const isLoggedIn=req.isLoggedIn
   if(!isLoggedIn) return res.redirect('/login')
 
@@ -36,11 +36,13 @@ exports.getHomeDetails = (req,res,next) =>{
   })  
 }
 
-exports.getFavourites = (req,res,next)=>{
+exports.getFavourites = (req,res)=>{
   const isLoggedIn=req.isLoggedIn
-  if(!isLoggedIn) return res.redirect('/login')
+  const usertype=req.session.user.usertype   
 
-  const usertype=req.session.user.usertype 
+  if(!isLoggedIn) return res.redirect('/login')
+  if(usertype!='guest') return res.redirect('/home')
+
   const userId = req.session.user._id
 
   User.findOne({_id:userId}).populate('favHomeIds')
@@ -60,29 +62,30 @@ exports.getFavourites = (req,res,next)=>{
 }
 
 exports.postFavourites = (req,res,next) => {
-  if(!req.isLoggedIn) return res.redirect('/login')  
   const homeId=req.body.homeId;
   const userId=req.session.user._id;
   
-  User.findOne({_id:userId})
+  User.findById(userId)
   .then((user)=>{   
-    if(user.favHomeIds.includes(homeId)) console.log("Already in favourite")
+    if(user.favHomeIds.includes(homeId)){
+      console.log("Already in favourite")
+      return user;
+    }
     else{
-      console.log("Fav added");
       user.favHomeIds.push(homeId);
+      console.log("Fav added");
       return user.save()
     }
   })
   .then((user)=>{
+    console.log(user);
     res.redirect('/favourites')
   })
   .catch((err)=>console.log("Error in adding fav",err)
   )
-
 }
 
-exports.removeFavourites=(req,res,next)=>{
-  if(!req.isLoggedIn) return res.redirect('/login')
+exports.removeFavourites=(req,res)=>{
   const homeId=req.body.homeId;
   const userId = req.session.user._id
 
@@ -99,10 +102,9 @@ exports.removeFavourites=(req,res,next)=>{
   })
   .catch((err)=>console.log("Error in removing fav",err)
   )
-
 }
 
-exports.getBookings = (req,res,next)=>{
+exports.getBookings = (req,res)=>{
   const isLoggedIn=req.isLoggedIn
   if(!isLoggedIn) return res.redirect('/login')
 

@@ -1,13 +1,13 @@
 const Home = require('../models/home')
 const User = require('../models/user')
 
-exports.getHostHome = (req,res,next)=>{
+exports.getHostHome = (req,res)=>{
   const isLoggedIn=req.isLoggedIn
   const userId=req.session.user._id 
   const usertype=req.session.user.usertype  
   
   User.findById(userId).populate('homeList')
-  .then((user)=>{
+  .then((user)=>{    
     const homes=user.homeList;
     res.render('host/host-home-list',{
       homes,
@@ -71,7 +71,7 @@ exports.getEditHome = (req,res,next)=>{
       pageTitle:'Edit Home to Air BnB',
       isLoggedIn,
       usertype
-  })
+    })
   })
 }
 
@@ -98,7 +98,7 @@ exports.postEditHome  = (req,res,next)=>{
   })
 }
 
-exports.postDeleteHome  = (req,res,next)=>{
+exports.postDeleteHome  = (req,res)=>{
   const homeId = req.params.homeId;
   console.log(homeId);
   
@@ -120,7 +120,6 @@ exports.postDeleteHome  = (req,res,next)=>{
      console.log("Error in deleting home:",err);
   })
   
-
 }
 
 
