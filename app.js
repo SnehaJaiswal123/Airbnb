@@ -1,5 +1,6 @@
 const express= require('express');
 const bodyParser = require('body-parser')
+const path = require('path')
 const hostROuter = require('./router/host');
 const storeRouter = require('./router/store');
 const authRouter = require('./router/auth');
@@ -13,7 +14,8 @@ require('dotenv').config()
 const app = express();
 
 app.set('view engine','ejs')
-app.set('views','views')
+app.set('views',path.join(__dirname,'views'))
+app.use(express.static(path.join(__dirname,'public')))
 app.use(bodyParser.urlencoded())
 
 const store = new mongoSessionStore({

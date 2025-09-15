@@ -4,7 +4,7 @@ const User = require('../models/user')
 
 exports.getHome = (req,res)=>{
   const isLoggedIn=req.isLoggedIn      
-  const usertype=req.session.user.usertype
+  const usertype=req.session.user?req.session.user.usertype:undefined
   
   Home.find().then((homes)=>{   
       res.render('store/home-list',{
@@ -38,11 +38,11 @@ exports.getHomeDetails = (req,res) =>{
 
 exports.getFavourites = (req,res)=>{
   const isLoggedIn=req.isLoggedIn
-  const usertype=req.session.user.usertype   
-
   if(!isLoggedIn) return res.redirect('/login')
-  if(usertype!='guest') return res.redirect('/home')
 
+  const usertype=req.session.user.usertype 
+  if(usertype!='guest') return res.redirect('/home')
+  
   const userId = req.session.user._id
 
   User.findOne({_id:userId}).populate('favHomeIds')

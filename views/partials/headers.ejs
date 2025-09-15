@@ -1,24 +1,26 @@
-<header>
-  <nav>
-    <a href="/home">Home</a>
-    <% if(isLoggedIn){ %>
-      <% if(usertype=='guest'){ %>
-        <a href="/favourites">Favourites</a>
-        <a href="/bookings">Bookings</a>
+<header class="bg-white shadow">
+  <nav class="max-w-5xl mx-auto flex items-center justify-between py-4 px-6">
+    <a href="/home" class="text-2xl font-bold text-blue-700">Home</a>
+    <div class="flex items-center gap-6">
+      <% if(isLoggedIn){ %>
+        <% if(usertype=='guest'){ %>
+          <a href="/favourites" class="text-gray-700 hover:text-blue-600 font-medium">Favourites</a>
+          <a href="/bookings" class="text-gray-700 hover:text-blue-600 font-medium">Bookings</a>
+        <% } %>
+        <% if(usertype=='host'){ %>
+          <a href="/host/add-home" class="text-gray-700 hover:text-blue-600 font-medium">Add Home</a>
+          <a href="/host/home-list" class="text-gray-700 hover:text-blue-600 font-medium">Host Home List</a>
+        <% } %>
       <% } %>
-      <% if(usertype=='host'){ %>
-        <a href="/host/add-home">Add Home</a>
-        <a href="/host/home-list">Host Home List</a>
+      <% if(!isLoggedIn){ %>
+        <a href="/login" class="text-gray-700 hover:text-blue-600 font-medium">LogIn</a>
+        <a href="/signup" class="ml-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 font-medium">Signup</a>
+      <% }else { %>
+        <form action="/logout" method="post" class="inline">
+          <button type="submit" class="ml-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 font-medium">Logout</button>
+        </form>
       <% } %>
-    <% } %>
-    <% if(!isLoggedIn){ %>
-      <a href="/login">LogIn</a>
-      <a href="/signup"> Signup </a>
-    <% }else { %>
-      <form action="/logout" method="post">
-        <button type="submit">Logout</button>
-      </form>
-    <% } %>
+    </div>
   </nav>
 </header>
 

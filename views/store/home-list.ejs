@@ -1,18 +1,27 @@
 <%- include('../partials/head') %>
+  <!-- Add Tailwind CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   </head>
-  <body>
+  <body class="bg-gray-100 min-h-screen">
     <%- include('../partials/headers') %>
-    <h1>Welcome to AirBnb</h1>
-    <ul>
+    <h1 class="text-4xl font-bold text-center mt-8 mb-6 text-blue-700">Welcome to AirBnb</h1>
+    <ul class="max-w-3xl mx-auto space-y-6">
       <% homes.forEach((home)=>{ %>
-        <li>
-            <span><%= home.houseName %></span>
-            <span><%= home.price %></span>
-            <span><%= home.rating %></span>
-            <span><%= home.location %></span>
-            <span><%= home.description %></span>
-            <button>Book</button>
-            <a href="/home/<%= home._id %>"> Detail </a>
+        <li class="bg-white rounded-lg shadow-md p-6 flex flex-col gap-2">
+            <!-- Home Image -->
+            <img src="https://news.airbnb.com/wp-content/uploads/sites/4/2022/09/AIRBNB-Yuvraj-Singh_Image-01_PDP.jpg" alt="<%= home.photo_url %>" class="w-full h-56 object-cover rounded-md mb-3">
+            <div class="text-xl font-semibold text-gray-800"><%= home.houseName %></div>
+            <div class="text-lg text-green-600 font-bold">₹ <%= home.price %></div>
+            <div class="flex items-center gap-2">
+              <span class="text-yellow-500">★</span>
+              <span class="text-gray-700"><%= home.rating %></span>
+            </div>
+            <div class="text-gray-500"><%= home.location %></div>
+            <div class="text-gray-700 mb-2"><%= home.description %></div>
+            <div class="flex gap-4 mt-2">
+              <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow">Book</button>
+              <a href="/home/<%= home._id %>" class="text-blue-600 hover:underline font-medium">Detail</a>
+            </div>
         </li>
       <% }) %>
     </ul>
