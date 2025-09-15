@@ -7,22 +7,22 @@ const errorController = require('./controllers/errors');
 const { default: mongoose } = require('mongoose');
 const session = require('express-session')
 const mongoSessionStore = require('connect-mongodb-session')(session)
-const db_url = "mongodb+srv://snehajais270703_db_user:eyLybthyDhpNqohe@cluster0.fj7tm8g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-
+const PORT=process.env.PORT || 3000
+require('dotenv').config()
 
 const app = express();
 
 app.set('view engine','ejs')
 app.set('views','views')
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded())
 
 const store = new mongoSessionStore({
-  uri:db_url,
+  uri:process.env.DB_URL,
   collection:'sessions'
 })
 
 app.use(session({
-  secret:"123456789",
+  secret:process.env.SESSION_SECRET,
   resave:false,
   saveUninitialized:true,
   store
@@ -38,28 +38,20 @@ app.use('/host',(req,res,next)=>{
     res.redirect('/login');
   }
   else next();
-});
+})
 
 app.use('/host',hostROuter);
 app.use(authRouter);
 app.use(storeRouter);
 app.use(errorController.pageNotFound);
 
-mongoose.connect(db_url)
+mongoose.connect(process.env.DB_URL)
 .then(()=>{
   console.log("Db connected");
-  app.listen('3000',()=>{
+  app.listen(PORT,()=>{
     console.log("App is running");
   })
 })
 .catch((err)=>{
   console.log("Error in connecting db:", err);
 })
-
-
-
-
-// snehajais270703_db_user
-// eyLybthyDhpNqohe
-
-// "mongodb+srv://snehajais270703_db_user:<db_password>@cluster0.fj7tm8g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
