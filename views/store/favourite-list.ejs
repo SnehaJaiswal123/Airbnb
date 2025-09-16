@@ -1,15 +1,22 @@
 <%- include('../partials/head') %>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   </head>
-  <body>
+  <body class="bg-gradient-to-br from-blue-100 via-white to-blue-200 min-h-screen">
     <%- include('../partials/headers') %>
-    <h1>Welcome to Favourites</h1>
-    <ul>
+    <h1 class="text-4xl font-bold text-center mt-10 mb-8 text-blue-700">Your Favourites</h1>
+    <ul class="max-w-3xl mx-auto space-y-6">
       <% favouriteHomes.forEach((home)=>{ %>
-        <li>
-            <span><%= home.price %></span>
-            <span><%= home.ratings %></span>
-            <span><%= home.location %></span>
-            <%- include('../partials/remFav',{homeId:home._id}) %>
+        <li class="bg-white rounded-lg shadow-md p-6 flex flex-col gap-2 border border-blue-100">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+              <div>
+                <span class="text-lg text-green-600 font-bold mr-4">₹ <%= home.price %></span>
+                <span class="text-yellow-500 font-semibold mr-4">★ <%= home.ratings %></span>
+                <span class="text-gray-700"><%= home.location %></span>
+              </div>
+              <div>
+                <%- include('../partials/remFav',{homeId:home._id}) %>
+              </div>
+            </div>
         </li>
       <% }) %>
     </ul>
