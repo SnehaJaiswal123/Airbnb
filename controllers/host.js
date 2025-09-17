@@ -3,6 +3,8 @@ const User = require('../models/user')
 
 exports.getHostHome = (req,res)=>{
   const isLoggedIn=req.isLoggedIn
+  if(!isLoggedIn) res.redirect('/login');
+
   const userId=req.session.user._id 
   const usertype=req.session.user.usertype  
   
@@ -24,8 +26,10 @@ exports.getHostHome = (req,res)=>{
   
 }
 
-exports.getAddHome = (req,res,next)=>{
+exports.getAddHome = (req,res)=>{
   const isLoggedIn=req.isLoggedIn
+  if(!isLoggedIn) res.redirect('/login');
+
   const usertype=req.session.user.usertype 
 
   res.render('host/AddHome',{
@@ -66,6 +70,8 @@ exports.postAddHome  = (req,res,next)=>{
 
 exports.getEditHome = (req,res,next)=>{
   const isLoggedIn=req.isLoggedIn
+  if(!isLoggedIn) res.redirect('/login');
+
   const usertype=req.session.user.usertype 
   const homeId = req.params.homeId;
 

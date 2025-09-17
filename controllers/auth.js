@@ -5,6 +5,8 @@ const bcrypt = require('bcryptjs')
 
 exports.getLogin = (req,res) =>{
   const isLoggedIn=req.isLoggedIn
+  if(isLoggedIn) res.redirect('/home');
+
   res.render('auth/login',{
     pageTitle:"Login",
     isLoggedIn,
@@ -73,6 +75,8 @@ exports.postLogin =[
 
 exports.getSignup = (req,res,next) =>{
   const isLoggedIn=req.isLoggedIn
+  if(isLoggedIn) res.redirect('/home');
+  
   res.render('auth/signup',{
     pageTitle:"Signup",
     isLoggedIn,
