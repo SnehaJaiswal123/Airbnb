@@ -9,6 +9,8 @@ exports.getHostHome = (req,res)=>{
   User.findById(userId).populate('homeList')
   .then((user)=>{    
     const homes=user.homeList;
+    console.log("Host homes:",homes);
+    
     res.render('host/host-home-list',{
       homes,
       pageTitle:'Air BnB',
@@ -34,7 +36,9 @@ exports.getAddHome = (req,res,next)=>{
 }
 
 exports.postAddHome  = (req,res,next)=>{
-  const {houseName,price,location,rating,description,photo_url} = req.body;
+  const {houseName,price,location,rating,description} = req.body;
+  const photo_url=`/temp/${req.file.filename}`
+  
   const userId = req.session.user._id;
   const newHome = new Home({houseName,price,location,rating,description,photo_url})
   

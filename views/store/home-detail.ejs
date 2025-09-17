@@ -5,7 +5,7 @@
     <%- include('../partials/headers') %>
     <div class="max-w-3xl mx-auto mt-10 bg-white rounded-2xl shadow-2xl p-10 border border-blue-100">
       <h1 class="text-4xl font-bold text-center mb-8 text-blue-700">Home Details</h1>
-      <img src="https://news.airbnb.com/wp-content/uploads/sites/4/2022/09/AIRBNB-Yuvraj-Singh_Image-01_PDP.jpg" alt="Image" class="w-full h-72 object-cover rounded-lg mb-6 shadow">
+      <img src="<%= home.photo_url%>" alt="Home Image" class="w-full h-72 object-cover rounded-lg mb-6 shadow">
       <div class="text-2xl font-semibold text-gray-800 mb-2"><%= home.houseName %></div>
       <div class="text-lg text-green-600 font-bold mb-2">₹ <%= home.price %></div>
       <div class="flex items-center gap-2 mb-2">

@@ -9,7 +9,7 @@
       <% homes.forEach((home)=>{ %>
         <li class="bg-white rounded-lg shadow-md p-6 flex flex-col gap-2">
             <!-- Home Image -->
-            <img src="https://news.airbnb.com/wp-content/uploads/sites/4/2022/09/AIRBNB-Yuvraj-Singh_Image-01_PDP.jpg" alt="<%= home.photo_url %>" class="w-full h-56 object-cover rounded-md mb-3">
+            <img src="<%= home.photo_url %>" alt="Home Image" class="w-full h-56 object-cover rounded-md mb-3">
             <div class="text-xl font-semibold text-gray-800"><%= home.houseName %></div>
             <div class="text-lg text-green-600 font-bold">₹ <%= home.price %></div>
             <div class="flex items-center gap-2">

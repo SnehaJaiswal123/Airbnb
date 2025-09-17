@@ -1,7 +1,7 @@
 const express= require('express');
 const bodyParser = require('body-parser')
 const path = require('path')
-const hostROuter = require('./router/host');
+const hostRouter = require('./router/host');
 const storeRouter = require('./router/store');
 const authRouter = require('./router/auth');
 const errorController = require('./controllers/errors');
@@ -15,8 +15,8 @@ const app = express();
 
 app.set('view engine','ejs')
 app.set('views',path.join(__dirname,'views'))
-app.use(express.static(path.join(__dirname,'public')))
-app.use(bodyParser.urlencoded())
+app.use(express.static("public"));
+app.use(express.urlencoded({extended:true}))
 
 const store = new mongoSessionStore({
   uri:process.env.DB_URL,
@@ -32,6 +32,9 @@ app.use(session({
 
 app.use('/',(req,res,next)=>{
   req.isLoggedIn=req.session.isLoggedIn?true:false;
+  console.log(req.isLoggedIn);
+  console.log(req.session.user);
+  
   next();
 })
 
@@ -42,7 +45,7 @@ app.use('/host',(req,res,next)=>{
   else next();
 })
 
-app.use('/host',hostROuter);
+app.use('/host',hostRouter);
 app.use(authRouter);
 app.use(storeRouter);
 app.use(errorController.pageNotFound);

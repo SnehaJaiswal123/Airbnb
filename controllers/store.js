@@ -6,7 +6,8 @@ exports.getHome = (req,res)=>{
   const isLoggedIn=req.isLoggedIn      
   const usertype=req.session.user?req.session.user.usertype:undefined
   
-  Home.find().then((homes)=>{   
+  Home.find().then((homes)=>{  
+      console.log(homes);  
       res.render('store/home-list',{
       homes,
       pageTitle:'Air BnB',

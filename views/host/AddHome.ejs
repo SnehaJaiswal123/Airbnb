@@ -6,22 +6,25 @@
     <div class="flex items-center justify-center min-h-[80vh]">
       <div class="w-full max-w-lg bg-white rounded-2xl shadow-2xl p-10 border border-blue-100">
         <h1 class="text-3xl font-extrabold text-center mb-8 text-blue-700 tracking-tight">Add your home</h1>
-        <form action="/host/home-added" method="post" class="flex flex-col gap-6">
+        <form action="/host/home-added" method="post" class="flex flex-col gap-6" enctype="multipart/form-data">
           <input 
             type="text" 
             name="houseName" 
             placeholder="House Name"
+            required
             class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
           >
           <input 
             type="number" 
             name="price" 
+            required
             placeholder="Price Per Night in Rs."
             class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
           >
           <input 
             type="text" 
             name="location" 
+            required
             placeholder="Location"
             class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
           >
@@ -33,15 +36,16 @@
             class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
           />
           <input 
-            type="text" 
+            type="textarea" 
             name="description" 
             placeholder="Description"
             class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
           >
           <input 
-            type="text" 
+            type="file"
             name="photo_url" 
-            placeholder="Image URL"
+            required
+            placeholder="Add Image"
             class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
           >
           <button 
